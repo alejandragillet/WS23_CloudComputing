@@ -18,3 +18,10 @@ Bash script that checks for a new version of the deployed container.
 If a new version is found, deletes the current container and downloads the latest version.
 
 Set up a daily cronjob in a Windows Subsystem for Linux (WSL) environment to execute the update script.
+
+# Work distribution
+- Alvaro: App microservice, cronjob
+- Alejandra: Plot microservice, docker-compose
+- Nestor: Database mircroservice, bash script
+
+Certainly, every team member will actively contribute to the project's overall success, offering assistance to colleagues whenever necessary.
