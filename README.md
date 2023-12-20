@@ -11,4 +11,4 @@ Team Members
   
 Proposal.md
 
-Please refer to the proposal.md file for a detailed overview of the project, including its objectives, scope, and key features.
+Please refer to the [proposal.md](https://github.com/Aljuagme/WS23_CloudComputing/blob/main/proposal.md) file for a detailed overview of the project, including its objectives, scope, and key features.
