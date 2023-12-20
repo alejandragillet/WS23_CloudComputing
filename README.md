@@ -4,8 +4,8 @@ Family Match Tracker is a monolithic web application developed 3 years ago using
 
 # Team Members
 - *Alvaro Juan Gomez*
-- *Alejandra*
-- *Nestor*
+- *Alejandra Gillet*
+- *Nestor Miguel*
   
 # Proposal
 
