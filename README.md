@@ -10,4 +10,5 @@ Team Members
 - Nestor
   
 Proposal.md
+
 Please refer to the proposal.md file for a detailed overview of the project, including its objectives, scope, and key features.
