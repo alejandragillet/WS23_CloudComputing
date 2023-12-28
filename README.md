@@ -1,25 +1,12 @@
-# Family MTG Match Tracker - Proposal
+# Family MTG Match Tracker
 
-The purpose of this proposal is to outline the plan for updating the existing Family Match Tracker application. The update involves addressing obsolete/modified libraries, refactoring the application into microservices, and implementing a containerized solution using Docker. Additionally, a daily update mechanism will be established to ensure the application stays up-to-date with the latest commits.
+Family Match Tracker is a monolithic web application developed 3 years ago using Flask, SQLAlchemy, and Plotly. The primary purpose of this application is to provide a platform for tracking and analyzing results of matches played among family members. The app allows users to create accounts, manage decks, record match outcomes, and view detailed statistics for each deck and against each opponent.
 
-# Objectives
+# Team Members
+- *Alvaro Juan Gomez*
+- *Alejandra Gillet*
+- *Nestor Miguel*
+  
+# Proposal
 
-Refactor the monolithic application into three microservices:
-- App Microservice: Contains the structure of the updated application.
-- Database Microservice: Manages the storage and retrieval of data.
-- Plot Microservice: Handles data retrieval, creates plot images, and displays them in the App Microservice.
-
-Utilize Docker to package each microservice into separate containers for easy deployment and scalability.
-
-Implement Docker-Compose to orchestrate the deployment and interaction of the three containers.
-
-A CI/CD pipeline using GitHub Actions will be responsible for triggering the new deployment by accessing our virtual machine via SSH. From there, it will execute the 'docker-compose up' command, ensuring a cloud-native approach.
-
-
-# Work distribution
-- Alvaro: App microservice, cronjob
-- Alejandra: Plot microservice, docker-compose
-- Nestor: Database mircroservice, bash script
-
-Certainly, every team member will actively contribute to the project's overall success, offering assistance to colleagues whenever necessary.
-
+Please refer to the [proposal.md](https://github.com/Aljuagme/WS23_CloudComputing/blob/main/proposal.md) file for a detailed overview of the project, including its objectives, scope, and key features.
