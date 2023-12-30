@@ -1,20 +1,13 @@
 from flask import Flask, render_template, redirect, request, session, flash, make_response, jsonify
 from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 import datetime
-# from database import db, User, Result, Deck
-import logging
-from os import environ
+import time
 
 from plotly.offline import plot
 import plotly.graph_objects as go
+import requests
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-# migrate = Migrate(app, db)
-
-# app.config.from_object("project.config.Config") <- USE THIS!!! 
-# Setting flask, db, and secret key for logging
 app = Flask(__name__)
 app.secret_key = "silencio"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@db:5432/postgres"
@@ -61,6 +54,7 @@ class Deck(db.Model):
     formato = db.Column(db.String(100), nullable=False)
     userID = db.Column(db.Integer)
     
+
 with app.app_context():
     db.create_all()
 
@@ -92,7 +86,6 @@ class Mazo:
 
 # Object with players and decks from the table
 core = Whole()
-
 
 def best_player():
     list_users = []
@@ -631,7 +624,9 @@ def logout():
 
     return redirect('/')
 
-# get all users
+
+
+# TEST ROUTES!!!!!!!!!!!!!!!
 @app.route('/get_users', methods=['GET'])
 def get_users():
   try:
@@ -657,14 +652,79 @@ def add_a():
         with app.app_context():
             db.session.add(row)
             db.session.commit()
+            
+        with app.app_context():
+            id_user = User.query.all()[-1].id
+        pl = Player(id_user, username)
+        core.players.append(pl)
 
         return jsonify({'message': 'User added successfully'}), 201  # 201 Created status code
     except Exception as e:
-        print(e)
+        return make_response(jsonify({'error': str(e)}), 500)
+
+
+@app.route('/add_d', methods=["POST"])
+def add_d():
+    try:
+        data = request.json  # Assuming you're sending JSON data in the request body
+        name_deck = data.get('deck')
+        format_ = data.get('format')
+        user_id = data.get("user_id")
+
+        row = Deck(name=name_deck, formato=format_, userID=user_id)
+        with app.app_context():
+            db.session.add(row)
+            db.session.commit()
+        
+        try:
+            # Go and add the deck to that user, so you can use it without logging out
+            with app.app_context():
+                id_deck = Deck.query.all()[-1].id
+            d = Mazo(id_deck, name_deck, format_)
+            core.decks.append(d)
+            for us in core.players:
+                if d.playerID == us.id:
+                    us.decks.append(d)
+            return redirect('/magic')
+        except Exception:
+                return "Something went wrong creating the deck"
+    except Exception as e:
+        return make_response(jsonify({'error': str(e)}), 500)
+
+
+@app.route('/add_r', methods=["POST"])
+def add_r():
+    try:
+        data = request.json  # Assuming you're sending JSON data in the request body
+        user_one = data.get('username1')
+        deck_one = data.get('deck1')
+        result = data.get("resultado")
+        deck_two = data.get("deck2")
+        user_two = data.get("username2")
+        mvp = data.get("mvp")
+        
+        with app.app_context():
+            id1 = User.query.filter_by(username=user_one)[0].id
+            id2 = User.query.filter_by(username=user_two)[0].id
+            deckid1 = Deck.query.filter_by(name=deck_one)[0].id
+            deckid2 = Deck.query.filter_by(name=deck_two)[0].id
+
+        row = Result(username1=user_one, deck1=deck_one, result=result, deck2=deck_two,
+                        username2=user_two, mvp=mvp, userID1=id1, userID2=id2, deckID1=deckid1, deckID2=deckid2)
+
+        # Try to save it in the database, and go back to the 'main' page
+        try:
+            db.session.add(row)
+            db.session.commit()
+            return redirect('/magic')
+
+        except Exception as error:
+            return error
+    except Exception as e:
         return make_response(jsonify({'error': str(e)}), 500)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
     
 # get all users
 @app.route('/get_decks', methods=['GET'])
@@ -675,7 +735,7 @@ def get_decks():
         return make_response(jsonify([deck.json() for deck in decks]), 200)
     except Exception as e:
         return(e)
-        return make_response(jsonify({'message': 'error getting decks'}), 500)
+
 
 # if __name__ == "__main__":
 #     with app.app_context():
