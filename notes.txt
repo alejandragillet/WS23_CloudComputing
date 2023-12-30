@@ -1,0 +1,29 @@
+Build the new image and spin up the two containers:
+$ docker-compose up -d --build
+
+Create the table:
+$ docker-compose exec flask python manage.py create_db
+
+Seed the table:
+$ docker-compose exec flask python manage.py seed_db
+Get the following error?
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError)
+FATAL:  database "hello_flask_dev" does not exist
+
+Run docker-compose down -v to remove the volumes along with the containers. Then, re-build the images, run the containers, and apply the migrations.
+
+Ensure the users table was created:
+$ docker-compose exec db psql --username=postgres --dbname=postgres
+
+\c hello_flask_dev
+\dt
+
+
+# REMEMBER
+
+to delete docker image! not enough with docker-compose down
+make sure postgres is on before flask! Sometimes depends_on command on compose does not seem to work
+the app needs to have all for working! data in users, decks and results
+the app needs the app.app_context() when interacting with db
+was psycopg2 in docker-compose the one that did the trick??
+

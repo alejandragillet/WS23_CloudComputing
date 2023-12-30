@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <link rel="stylesheet" href="/static/css/login.css">
+        <title>Welcome to Valhalla</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Project Programming II">
+        <meta name="keywords" content="Project, Programming, MTG">
+        <meta name="author" content="Alvaro Juan">
+        <meta name="viewport" content="width=device-width">
+
+<style>
+    body {
+    background-image: url("/static/img/welcome_valhalla.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    font-weight:bold;
+}
+
+.form-control {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+
+}
+
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    width: 360px;
+    margin:10px;
+    font-weight:bold;
+}
+
+.buttono {
+  background-color: #848484;
+  color: white;
+  border: 2px solid #848484;
+}
+
+.buttono:hover {
+  background-color: #848484;
+  color: #000000;
+  border: 2px solid #FF8000;
+}
+
+</style>
+</head>
+    <body>
+        <div class="form-control">
+        <h1 style="color: #FF8000; font-size: 50px; font-variant: small-caps;text-decoration:underline">VALHALLA'S DOOR</h1>
+        </div>
+
+        <form action="/login" method="post">
+        <div class="form-control">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+
+            <input class="form-control" name="password" placeholder="Password" type="password"/>
+
+        <button class="button" type="submit">Log In</button>
+        </div>
+        </form>
+        <div class="form-control">
+            <a href="/register">
+          <button class="button1 buttono" type="submit">Register</button>
+        </a></div>
+
+    </body>
+</html>

@@ -1,0 +1,12 @@
+body {
+    background-image: url("/static/img/mt.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-color: #085110;
+}
+.door {
+    width: 20%;
+    position: center;
+}

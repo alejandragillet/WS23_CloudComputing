@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/css/register.css">
+    <meta charset="UTF-8">
+    <title>Greetings adventurer</title>
+    <meta name="description" content="Project Programming II">
+    <meta name="keywords" content="Project, Programming, MTG">
+    <meta name="author" content="Alvaro Juan">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        body {
+    background-image: url("/static/img/road_valhalla.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.form-control {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    padding: 4px 32px;
+}
+
+.form-control1 {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    margin-top: 170px;
+    padding: 4px 32px;
+}
+
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    width: 210px;
+    margin:10px;
+    font-weight:bold;
+}
+
+.buttono {
+  background-color: #848484;
+  color: white;
+  border: 2px solid #848484;
+}
+
+.buttono:hover {
+  background-color: #8B4513;
+  color: #000000;
+  border: 2px solid #FF8000;
+}
+    </style>
+</head>
+<body>
+    <form action="/register" method="POST">
+        <div class="form-control">
+            <input class="form-control1" autofocus autocomplete="off"  name="username" placeholder="Username" type="text"/>
+            <br>
+            <input class="form-control" autocomplete="off" name="password" placeholder="Password" type="password"/>
+            <br>
+            <input class="form-control" autocomplete="off" name="confirmation" placeholder="Password Confirmation" type="password"/>
+            <br>
+            <button class="button1 buttono" type="submit">Register</button>
+        </div>
+    </form>
+</body>
+</html>
+

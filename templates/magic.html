@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Odin's Table</title>
+{% endblock %}
+
+{% block body %}
+
+    <style>
+    .grid {
+    display: grid;
+    grid-template-columns:5% 47% 6% 35% 7%;
+    grid-template-rows:  5% 15% 2% 29% 2% 47%;
+}
+    </style>
+    <div id="navbar">
+        <a href="/magic">Home</a>
+        <a href="/stats/{{ rows[1] }}">My Stats</a>
+        <a href="/decks">Best Decks</a>
+        <a href="/magic_result">Add Result</a>
+        <a href="/add_deck">Add Deck</a>
+        <a href="/chart">Chart</a>
+        <a style="float: right; margin-right: 2%" href="/logout">Logout</a>
+        </div>
+
+    {% if rows|length < 1 %}
+    <h4> There are no results yet. Please add one below</h4>
+
+    {% else %}
+        <div class="grid">
+        <table style="width: 75%; grid-column: 2; grid-row: 2">
+            <tr>
+                <th> Player1</th>
+                <th> Deck1</th>
+                <th> Result </th>
+                <th> Deck2</th>
+                <th> Player2</th>
+                <th> MVP</th>
+                <th>Date</th>
+                {% if rows[1] == 1 %}
+                <th> Action</th>
+                    {% endif %}
+            </tr>
+            <tr>
+            {% for row in rows[0] %}
+                <td>
+                    <a href="/stats/{{ row.userID1 }}">{{ row.username1 }}</a>
+                </td>
+            <td>
+                <a href="/deck/{{ row.deckID1 }}">{{ row.deck1 }}</a>
+            </td>
+            <td>{{ row.result }}</td>
+            <td>
+                <a href="/deck/{{ row.deckID2 }}"> {{ row.deck2 }}</a>
+            </td>
+            <td>
+                <a href="/stats/{{ row.userID2 }}"> {{ row.username2 }}</a>
+            </td>
+            <td>{{ row.mvp }}</td>
+            <td>{{ row.date_inserted.date() }}</td>
+                {% if rows[1] == 1 %}
+            <td>
+                <b><a style="color:#ff5349" href="/magic_delete/{{ row.id }}">Delete</a></b>
+            </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <table style="width: 80%; grid-column: 4; grid-row: 2; position: -webkit-sticky; position: sticky; top:60px">
+        <tr>
+            <th style="background-color: mediumvioletred"> Best Player </th>
+            <th style="background-color: mediumvioletred"> Victories </th>
+            <th style="background-color: mediumvioletred"> Total Played</th>
+            <th style="background-color: mediumvioletred"> Success</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="/stats/{{ rows[2][0]['id'] }}"> {{ rows[2][0]['username'] }} </a>
+            </td>
+            <td>{{ rows[2][0]['victories']  }}</td>
+            <td>{{ (rows[2][0]['victories'] + rows[2][0]['defeats']) }}</td>
+            <td>{{ rows[2][0]['success'] }} %</td>
+        </tr>
+
+        </table>
+
+        <table style="width: 80%; grid-column: 4; grid-row: 4;  position: -webkit-sticky; position: sticky; top:200px;">
+        <tr>
+            <th style="background-color: mediumvioletred"> Best Deck </th>
+            <th style="background-color: mediumvioletred"> Owner </th>
+            <th style="background-color: mediumvioletred"> Victories </th>
+            <th style="background-color: mediumvioletred"> Total Played</th>
+            <th style="background-color: mediumvioletred"> Success</th>
+        </tr>
+        <tr>
+            <td>
+                <a href="/deck/{{ rows[3]['deckID'] }}"> {{ rows[3]['deckname'] }}</a>
+            </td>
+            <td>{{ rows[3]['owner'] }}</td>
+            <td>{{ rows[3]['victories']  }}</td>
+            <td>{{ (rows[3]['victories'] + rows[3]['defeats']) }}</td>
+            <td>{{ rows[3]['success'] }} %</td>
+        </tr>
+
+        </table>
+</div>
+    {% endif %}
+
+{% endblock %}

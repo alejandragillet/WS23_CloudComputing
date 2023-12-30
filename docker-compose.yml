@@ -1,0 +1,28 @@
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - DB_URL=postgresql+psycopg2://postgres:postgres@db:5432/postgres
+  db:
+    container_name: db
+    image: postgres:13
+    #volumes:
+      #- postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+
+#volumes:
+  #postgres_data:

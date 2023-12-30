@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"> -->
+    <meta name="description" content="Project">
+    <meta name="keywords" content="Project, Programming, MTG">
+    <meta name="author" content="Alvaro Juan">
+    <meta name="viewport" content="width=device-width">
+
+<style>
+ body {
+    background-image: url("/static/img/green_back.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+table {
+    border-collapse: collapse;
+    width: 35%;
+    opacity: 0.8;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top: 6%;
+
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 1px solid black;
+}
+
+tr{background-color: #f2f2f2}
+
+
+th {
+    background-color: #4CAF50;
+    color: white;
+
+}
+
+/* The background of the navbar */
+#navbar {
+    background-color: black;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    display: block;
+    transition: top 0.5s;
+    z-index:1000;
+}
+/* The content of the navbar */
+#navbar a{
+    float: left;
+    display: block;
+    color: beige;
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+}
+/* Once you go with the mouse */
+#navbar a:hover{
+    background-color: darkslategrey;
+    color: darkseagreen;
+}
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+
+a:hover {
+    color: #085110;
+    text-decoration: underline;
+}
+
+.center {
+     margin:auto;
+     width:25%;
+}
+
+.out {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+.button2 {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 18px;
+  width: 140px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+h2 {
+    color: #f4511e;
+}
+</style>
+
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body>
+
+
+    {% block body %}
+
+    {% endblock %}
+</body>
+</html>
+
+<!-- body {
+    background-image: url("/static/img/green_back.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+table {
+    border-collapse: collapse;
+    width: 35%;
+    opacity: 0.8;
+    margin-right:auto;
+    margin-left:auto;
+
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+  border-bottom: 1px solid black;
+}
+
+tr{background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.center {
+     margin:auto;
+     width:25%;
+}
+
+.out {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+.button2 {
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 18px;
+  width: 140px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+h2 {
+    color: #f4511e;
+} -->
+

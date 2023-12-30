@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Odin's Table</title>
+{% endblock %}
+
+{% block body %}
+
+    <div id="navbar">
+        <a href="/magic">Home</a>
+        <a href="/stats/{{ dicc[-1] }}">My Stats</a>
+        <a href="/decks">Best Decks</a>
+        <a href="/magic_result">Add Result</a>
+        <a href="/add_deck">Add Deck</a>
+        <a href="/chart">Chart</a>
+        <a style="float: right; margin-right: 2%" href="/logout">Logout</a>
+    </div>
+
+        <table>
+                <tr>
+                    <th style="background-color: mediumvioletred"> User</th>
+                    <th style="background-color: mediumvioletred"> Victories</th>
+                    <th style="background-color: mediumvioletred"> Defeats</th>
+                    <th style="background-color: mediumvioletred"> Success</th>
+                </tr>
+
+
+                <tr>
+                    <td>{{ dicc[2]['username'] }}</td>
+                    <td>{{ dicc[2]['victories'] }}</td>
+                    <td>{{ dicc[2]['defeats'] }}</td>
+                    <td>{{ (dicc[2]['victories'] * 100 / (dicc[2]['defeats'] + dicc[2]['victories']))|round|int }} %</td>
+                </tr>
+
+            </table>
+
+        <table>
+            <tr>
+                <th> User</th>
+                <th> Deck</th>
+                <th> Victories</th>
+                <th> Defeats</th>
+                <th> Success</th>
+            </tr>
+
+            {% for deck in dicc[0] %}
+            <tr>
+                <td>{{ deck['owner'] }}</td>
+                <td>
+                    <a href="/deck/{{ deck['deck_id'] }}"> {{ deck['deckname'] }}</a>
+                </td>
+                <td>{{ deck['victories'] }}</td>
+                <td>{{ deck['defeats'] }}</td>
+                <td>{{ deck['success'] }} %</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <table>
+                <tr>
+                    <th> User</th>
+                    <th> Rival</th>
+                    <th> Victories</th>
+                    <th> Defeats</th>
+                    <th> Success</th>
+                </tr>
+
+                {% for rival in dicc[1] %}
+                <tr>
+                    <td>{{ dicc[2]['username'] }}</td>
+                    <td>
+                        <a href="/stats/{{ rival['rivalID'] }}"> {{ rival['rival'] }}</a>
+                    </td>
+                    <td>{{ rival['victories'] }}</td>
+                    <td>{{ rival['defeats'] }}</td>
+                    <td>{{ rival['success'] }} %</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+{% endblock %}

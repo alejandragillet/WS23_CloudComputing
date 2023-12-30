@@ -1,0 +1,49 @@
+body {
+    background-image: url("/static/img/road_valhalla.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.form-control {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    padding: 4px 32px;
+}
+
+.form-control1 {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    margin-top: 170px;
+    padding: 4px 32px;
+}
+
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    width: 210px;
+    margin:10px;
+    font-weight:bold;
+}
+
+.buttono {
+  background-color: #848484;
+  color: white;
+  border: 2px solid #848484;
+}
+
+.buttono:hover {
+  background-color: #8B4513;
+  color: #000000;
+  border: 2px solid #FF8000;
+}

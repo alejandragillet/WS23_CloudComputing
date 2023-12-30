@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% block head %}
+<title> Chart Last 30 Days</title>
+    <style>
+
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div id="navbar">
+        <a href="/magic">Home</a>
+        <a href="/stats/{{ plot[1] }}">My Stats</a>
+        <a href="/decks">Best Decks</a>
+        <a href="/magic_result">Add Result</a>
+        <a href="/add_deck">Add Deck</a>
+        <a href="/chart">Chart</a>
+        <a style="float: right; margin-right: 2%" href="/logout">Logout</a>
+        </div>
+
+
+<h1 style="text-align: center">Statistics of the last month</h1>
+    {{ plot[0] }}
+{% endblock %}

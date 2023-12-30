@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Odin's Table</title>
+{% endblock %}
+
+{% block body %}
+        <style>
+    body{
+    background-image: url("/static/img/thalia_back.jpg");}
+
+        .button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    width: 147px;
+    margin-top: 5px;
+}
+
+.buttono {
+  background-color: #eac8f5;
+  color: green;
+  font-weight: bold;
+  margin-top:10px;
+
+}
+
+.buttono:hover {
+  background-color: green;
+  color: #FFFFFF;
+  border: 2px solid green;
+  font-weight: bold;
+
+}
+
+.form-control {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    padding: 4px 32px;
+}
+
+.form-control1 {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin: 5px;
+    padding: 4px 32px;
+    margin-top:60px;
+}
+
+.t {
+    color:#ffffff;
+    text-align: center;
+    background:#4CAF50;
+    margin:auto;
+    max-width:550px;
+    margin-top:5%;
+}
+    </style>
+    <div id="navbar">
+        <a href="/magic">Home</a>
+        <a href="/stats/{{ players[-1] }}">My Stats</a>
+        <a href="/decks">Best Decks</a>
+        <a href="/magic_result">Add Result</a>
+        <a href="/add_deck">Add Deck</a>
+        <a href="/chart">Chart</a>
+        <a style="float: right; margin-right: 2%" href="/logout">Logout</a>
+        </div>
+
+    <form action="/magic_result" method="POST">
+        <div class="form-control">
+            <h1 class="t">What result do you want to add?</h1>
+            <select name="username1">
+                {% for player in players[0][0] %}
+                <option value="{{player.name}}">{{ player.name }}</option>
+                {% endfor %}
+
+            </select>
+
+            <select name="deck1">
+                {% for deck in players[0][1] %}
+                <option value="{{deck.name}}">{{deck.name}}</option>
+                {% endfor %}
+
+            </select>
+
+            <select name="resultado">
+                <option value="2-0">2-0</option>
+                <option value="2-1">2-1</option>
+                <option value="1-2">1-2</option>
+                <option value="0-2">0-2</option>
+            </select>
+
+            <select name="deck2">
+                {% for deck in players[0][1] %}
+                <option value="{{deck.name}}">{{deck.name}}</option>
+                {% endfor %}
+            </select>
+
+            <select name="username2">
+                {% for player in players[0][0] %}
+                <option value="{{player.name}}">{{ player.name }}</option>
+                {% endfor %}
+            </select>
+
+            <input name="mvp" placeholder="Best Card" type="text">
+            <button class="button1 buttono" type="submit">Save</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+
+

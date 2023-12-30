@@ -1,0 +1,39 @@
+# .gitignore
+
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+
+# IDE-specific
+.idea/
+
+# Virtual environment
+venv/
+
+# Instance directory (if used for Flask)
+instance/
+
+# Database migrations
+migrations/
+
+
+# Logs
+*.log
+
+# Environment-specific files
+.env
+
+# Local configuration file (if used)
+config_local.py
+config.py
+database.py
+extra.py
+manage.py
+database.conf
+.env.dev
+
+
+automate.sh

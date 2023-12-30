@@ -1,0 +1,50 @@
+body {
+    background-image: url("/static/img/welcome_valhalla.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    font-weight:bold;
+}
+
+.form-control {
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+
+}
+
+.button1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 7px 12px;
+    width: 360px;
+    margin:10px;
+    font-weight:bold;
+}
+
+.buttono {
+  background-color: #848484;
+  color: white;
+  border: 2px solid #848484;
+}
+
+.buttono:hover {
+  background-color: #848484;
+  color: #000000;
+  border: 2px solid #FF8000;
+}
