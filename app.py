@@ -307,7 +307,34 @@ def deck_stats(id):
     list_rivals = sorted(list_rivals, key=lambda x: x['success'], reverse=True)
     return list_rivals, dicc_total, session['user']
 
+# def last_month():
+#     with app.app_context():
+#         rows_m = Result.query.all()
+#     last_month = []
+#     dicc_month = {}
 
+#     for dato in rows_m:
+#         if (datetime.datetime.utcnow() - dato.date_inserted) < datetime.timedelta(30):
+#             if dato.result == "2-0" or dato.result == "2-1":
+#                 if not dato.username1 in dicc_month:
+#                     dicc_month[dato.username1] = [0, 0, 0]
+#                 if not dato.username2 in dicc_month:
+#                     dicc_month[dato.username2] = [0, 0, 0]
+
+#                 dicc_month[dato.username1][0] += 1
+#                 dicc_month[dato.username2][1] += 1
+#             else:
+#                 dicc_month[dato.username1][1] += 1
+#                 dicc_month[dato.username2][0] += 1
+
+
+#     for key, value in dicc_month.items():
+#         dicc_month[key][2] = int(round((dicc_month[key][0] *100) / (dicc_month[key][0] + dicc_month[key][1])))
+
+#     for i in dicc_month.items():
+#         last_month.append(i)
+
+#     return last_month
 
 # Login, if no user is log in, the web redirects here
 @app.route("/login", methods=["POST", 'GET'])
@@ -520,7 +547,19 @@ def decks_stats():
         return redirect('/magic')
 
 
+# @app.route('/chart')
+# def chart():
+#     lass = last_month()
+#     labels = [i[0] for i in lass]
+#     dataset = [i[1][2] for i in lass]
 
+#     my_plot = plot([go.Bar(x=labels, y=dataset)], output_type='div')
+
+#     try:
+#         return render_template('chart.html', plot=(Markup(my_plot), session['user']))
+
+#     except:
+#         return redirect('/magic')
 
 # Create an user
 @app.route('/register', methods=['GET', 'POST'])
