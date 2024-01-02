@@ -1,0 +1,33 @@
+name: Docker Compose Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout código fuente
+      uses: actions/checkout@v2
+
+    - name: Configurar Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Iniciar servicios de Docker Compose
+      run: |
+        docker-compose -f ./path/to/your/docker-compose.yml up -d
+      working-directory: ${{ github.workspace }}
+
+    - name: Construir y publicar imagen Docker
+      run: |
+        echo ${{ secrets.123456789 }} | docker login -u ${{ secrets.alejandragillet }} --password-stdin
+        docker-compose -f WS23_CloudComputing/new/main/workflows/docker-compose.yml build
+        docker-compose -f WS23_CloudComputing/new/main/workflows//docker-compose.yml push
+
+    - name: Detener servicios de Docker Compose
+      run: |
+        docker-compose -f WS23_CloudComputing/new/main/workflows//docker-compose.yml down
+      working-directory: ${{ github.workspace }}
