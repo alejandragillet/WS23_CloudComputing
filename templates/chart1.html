@@ -11,14 +11,21 @@
     <div id="navbar">
         <a href="/magic">Home</a>
         <a href="/stats/{{ plot[1] }}">My Stats</a>
-        <a href="/decks">Best Decks</a>
-        <a href="/magic_result">Add Result</a>
-        <a href="/add_deck">Add Deck</a>
+        <a href="http://127.0.0.1:5000/decks">Best Decks</a>
+        <a href="http://127.0.0.1:5000/magic_result">Add Result</a>
+        <a href="http://127.0.0.1:5000/add_deck">Add Deck</a>
         <a href="/chart">Chart</a>
         <a style="float: right; margin-right: 2%" href="/logout">Logout</a>
         </div>
 
 
-<h1 style="text-align: center">Statistics of the last month</h1>
+<!-- <h1 style="text-align: center">Statistics of the last month</h1>
     {{ plot[0] }}
+-->
+
+<br><br><br>
+    <div>
+    <h1 style="text-align: center; color: #FF8000"><b>Statistics of the last month</b></h1>
+    {{ plot[0] }}
+    </div>
 {% endblock %}
