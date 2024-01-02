@@ -18,7 +18,7 @@ jobs:
 
     - name: Iniciar servicios de Docker Compose
       run: |
-        docker-compose -f ./path/to/your/docker-compose.yml up -d
+        docker-compose -f WS23_CloudComputing/new/main/workflows/docker-compose.yml up -d
       working-directory: ${{ github.workspace }}
 
     - name: Construir y publicar imagen Docker
