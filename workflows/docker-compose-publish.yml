@@ -25,9 +25,9 @@ jobs:
       run: |
         echo ${{ secrets.123456789 }} | docker login -u ${{ secrets.alejandragillet }} --password-stdin
         docker-compose -f WS23_CloudComputing/new/main/workflows/docker-compose.yml build
-        docker-compose -f WS23_CloudComputing/new/main/workflows//docker-compose.yml push
+        docker-compose -f WS23_CloudComputing/new/main/workflows/docker-compose.yml push
 
     - name: Detener servicios de Docker Compose
       run: |
-        docker-compose -f WS23_CloudComputing/new/main/workflows//docker-compose.yml down
+        docker-compose -f WS23_CloudComputing/new/main/workflows/docker-compose.yml down
       working-directory: ${{ github.workspace }}
