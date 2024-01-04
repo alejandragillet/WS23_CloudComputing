@@ -3,6 +3,7 @@ services:
     build:
       context: ./..
       dockerfile: .Dockerfile
+    image: alejandragillet/flask_app
     container_name: flask_app
     ports:
       - "5000:5000"
@@ -28,6 +29,7 @@ services:
     build:
       context: ./..
       dockerfile: plot.Dockerfile
+    image: alejandragillet/plot
     container_name: plot
     ports:
       - "5001:5000"
