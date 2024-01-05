@@ -3,7 +3,7 @@ FROM python:3.11-slim
 
 COPY . /app
 
-# Set the working directory to /app
+# Set the working directory to /app 
 WORKDIR /app
 
 RUN pip freeze | grep plot
