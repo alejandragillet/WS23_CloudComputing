@@ -27,8 +27,8 @@ services:
 
   plot:
     # build:
-    #   context: ./..
-    #   dockerfile: plot.Dockerfile
+      # context: ./..
+      # dockerfile: plot.Dockerfile
     image: tatooine7/plot
     container_name: plot2
     ports:
