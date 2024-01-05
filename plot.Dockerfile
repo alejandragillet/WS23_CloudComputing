@@ -3,11 +3,9 @@ FROM python:3.11-slim
 
 COPY . /app
 
-# Set the working directory to /app 
+# Set the working directory to /app
 WORKDIR /app
 
-RUN pip freeze | grep plot
-RUN python -m pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 ENV FLASK_APP="plot.py"
