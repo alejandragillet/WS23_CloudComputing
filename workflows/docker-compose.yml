@@ -1,8 +1,8 @@
 services:
   flask:
-    build:
-      context: ./..
-      dockerfile: .Dockerfile
+    # build:
+    #   context: ./..
+    #   dockerfile: .Dockerfile
     image: tatooine7/flask_app
     container_name: flask_app2
     ports:
@@ -26,9 +26,9 @@ services:
       - 5432:5432
 
   plot:
-    build:
-      context: ./..
-      dockerfile: plot.Dockerfile
+    # build:
+    #   context: ./..
+    #   dockerfile: plot.Dockerfile
     image: tatooine7/plot
     container_name: plot2
     ports:
