@@ -33,7 +33,7 @@ jobs:
 
     - name: Update docker-compose
       run: |
-       keyscan 16.171.181.80 >> ~/.ssh/known_hosts
+       ssh-keyscan 16.171.181.80 >> ~/.ssh/known_hosts
 
     - name: Update docker-compose
       run: |
