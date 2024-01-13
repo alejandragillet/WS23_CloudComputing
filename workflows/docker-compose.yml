@@ -1,8 +1,8 @@
 services:
   flask:
-    # build:
-    #   context: ./..
-    #   dockerfile: .Dockerfile
+    build:
+      context: ./..
+      dockerfile: .Dockerfile
     image: tatooine7/flask_app
     container_name: flask_app2
     ports:
