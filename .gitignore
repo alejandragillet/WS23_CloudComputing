@@ -39,3 +39,5 @@ database.conf
 automate.sh
 
 plot.py
+
+.github/workflows/docker-compose-publish-alejandra.yml
