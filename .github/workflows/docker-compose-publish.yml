@@ -19,17 +19,23 @@ jobs:
     - name: Configurar Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Iniciar servicios de Docker Compose
-      run: |
-        docker-compose -f workflows/docker-compose.yml up -d
-      working-directory: ${{ github.workspace }}
 
     - name: Construir y publicar imagen Docker
       run: |
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
         docker-compose -f workflows/docker-compose.yml build
         docker-compose -f workflows/docker-compose.yml push
-    - name: Detener servicios de Docker Compose
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Setup known_hosts
       run: |
-        docker-compose -f workflows/docker-compose.yml down
-      working-directory: ${{ github.workspace }}
+       ssh-keyscan 16.171.181.80 >> ~/.ssh/known_hosts
+
+    - name: Update docker-compose
+      run: |
+       ssh ec2-user@16.171.181.80 "cd /home/ec2-user/WS23_CloudComputing/workflows && sudo docker-compose pull && sudo docker-compose up -d"
+
