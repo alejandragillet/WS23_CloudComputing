@@ -29,7 +29,7 @@ services:
     build:
       context: ./..
       dockerfile: plot.Dockerfile
-    image: alejandragillet/plot
+    #image: alejandragillet/plot
     container_name: plot
     ports:
       - "5001:5000"
