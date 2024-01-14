@@ -3,8 +3,10 @@ services:
     build:
       context: ./..
       dockerfile: .Dockerfile
-    image: tatooine7/flask_app
-    container_name: flask_app2
+
+    image: alejandragillet/flask_app # hace falta para cuando se hace push a docker hub!
+    container_name: flask_app
+
     ports:
       - "5000:5000"
     depends_on:
@@ -29,8 +31,9 @@ services:
     build:
       context: ./..
       dockerfile: plot.Dockerfile
-    # image: tatooine7/plot
-    container_name: plot2
+    image: alejandragillet/plot # hace falta para cuando se hace push a docker hub!
+    container_name: plot
+
     ports:
       - "5001:5000"
     depends_on:
