@@ -3,7 +3,7 @@ from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
-
+# test
 app = Flask(__name__)
 app.secret_key = "silencio"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@db:5432/postgres"
