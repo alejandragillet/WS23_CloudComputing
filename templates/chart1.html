@@ -3,7 +3,13 @@
 {% block head %}
 <title> Chart Last 30 Days</title>
     <style>
-
+        #chart-container {
+            text-align: center;
+        }
+    
+        #chart-image {
+            display: inline-block;
+        }
     </style>
 {% endblock %}
 {% block body %}
@@ -24,8 +30,8 @@
 -->
 
 <br><br><br>
-    <div>
+    <div id="chart-container">
     <h1 style="text-align: center; color: #FF8000"><b>Statistics of the last month</b></h1>
-    {{ plot[0] }}
+    <img id="chart-image" src="data:image/png;base64,{{ plot }}" alt="Chart Image">
     </div>
 {% endblock %}
