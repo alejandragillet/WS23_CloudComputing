@@ -35,6 +35,5 @@ manage.py
 database.conf
 .env.dev
 
-
 automate.sh
 
