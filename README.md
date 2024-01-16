@@ -29,12 +29,12 @@ This project is a Flask-based web application designed to track results for deck
 
 ## Installation
 ### Clone the repository
-git clone git@github.com:Aljuagme/WS23_CloudComputing.git
+``` git clone git@github.com:Aljuagme/WS23_CloudComputing.git ```
 
-cd WS23_CloudComputing
+``` cd WS23_CloudComputing ```
 
 ### Build and run the Docker containers
-docker-compose up -d
+``` docker-compose up -d ```
 
 This command will start all three containers in detached mode.
 
