@@ -24,7 +24,7 @@ This project is a Flask-based web application designed to track results for MTG 
 - /login: Start of the application, login with your credentials or register a new user.
 - /register: Register a new user by specifying a username, password, and confirm password.
 - /magic: Shows the last results of the matches played, along with who is the best player and best deck.
-- /stats/<id>: Shows personal statistics about the logged-in user regarding general performance against other players and per deck.
+- /stats/id: Shows personal statistics about the logged-in user regarding general performance against other players and per deck.
 - /decks: Shows the best 3 decks of all players and their stats.
 - /magic_result: Add the result of a match.
 - /add_deck: Add a deck to a user.
@@ -40,9 +40,9 @@ This project is a Flask-based web application designed to track results for MTG 
 
 ## Installation
 ### Clone the repository
-``` git clone git@github.com:Aljuagme/WS23_CloudComputing.git ```
+> ``` git clone git@github.com:Aljuagme/WS23_CloudComputing.git ```
 
-``` cd WS23_CloudComputing/workflows ```
+> ``` cd WS23_CloudComputing/workflows ```
 
 ### Build and run the Docker containers
 ``` docker-compose up -d ```
