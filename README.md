@@ -40,9 +40,9 @@ This project is a Flask-based web application designed to track results for MTG 
 
 ## Installation
 ### Clone the repository
-> ``` git clone git@github.com:Aljuagme/WS23_CloudComputing.git ```
+``` git clone git@github.com:Aljuagme/WS23_CloudComputing.git ```
 
-> ``` cd WS23_CloudComputing/workflows ```
+``` cd WS23_CloudComputing/workflows ```
 
 ### Build and run the Docker containers
 ``` docker-compose up -d ```
@@ -55,3 +55,15 @@ The project utilizes GitHub Actions for automated deployment. The pipeline is tr
 - Build Docker Images: Builds Docker images for each microservice.
 - Push Images to Docker Hub: Pushes the built images to Docker Hub.
 - Deploy to Server: Connects to the deployment server, in our case EC2 from Amazon and runs *docker-compose up* to have up-and-running the latest version of the application.
+
+# Takeaways
+
+## Microservices and Docker
+The project provided a hands-on experience with microservices, Docker, and containerization. Understanding how these containers communicate and work together within a microservices architecture was a key learning point.
+
+## Deployment Challenges and AWS
+Encountering difficulties in deploying containers to WSL from GitHub Actions prompted exploration of alternative solutions. Transitioning to AWS EC2 showcased the importance of cloud computing services in real-world scenarios.
+
+## GitHub Actions for Automation
+Working with GitHub Actions was a valuable experience, showcasing the advantages of automation. The pipeline automation significantly reduced the manual effort required for the deployment process.
+
