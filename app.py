@@ -1,20 +1,9 @@
 from flask import Flask, render_template, redirect, request, session, flash, make_response, jsonify
 from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 import datetime
-# from database import db, User, Result, Deck
-import logging
-from os import environ
 
-from plotly.offline import plot
-import plotly.graph_objects as go
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-# migrate = Migrate(app, db)
-
-# app.config.from_object("project.config.Config") <- USE THIS!!! 
-# Setting flask, db, and secret key for logging
+# test
 app = Flask(__name__)
 app.secret_key = "silencio"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@db:5432/postgres"
@@ -61,6 +50,7 @@ class Deck(db.Model):
     formato = db.Column(db.String(100), nullable=False)
     userID = db.Column(db.Integer)
     
+
 with app.app_context():
     db.create_all()
 
@@ -92,7 +82,6 @@ class Mazo:
 
 # Object with players and decks from the table
 core = Whole()
-
 
 def best_player():
     list_users = []
@@ -318,36 +307,34 @@ def deck_stats(id):
     list_rivals = sorted(list_rivals, key=lambda x: x['success'], reverse=True)
     return list_rivals, dicc_total, session['user']
 
+# def last_month():
+#     with app.app_context():
+#         rows_m = Result.query.all()
+#     last_month = []
+#     dicc_month = {}
 
-def last_month():
-    with app.app_context():
-        rows_m = Result.query.all()
-    last_month = []
-    dicc_month = {}
+#     for dato in rows_m:
+#         if (datetime.datetime.utcnow() - dato.date_inserted) < datetime.timedelta(30):
+#             if dato.result == "2-0" or dato.result == "2-1":
+#                 if not dato.username1 in dicc_month:
+#                     dicc_month[dato.username1] = [0, 0, 0]
+#                 if not dato.username2 in dicc_month:
+#                     dicc_month[dato.username2] = [0, 0, 0]
 
-    for dato in rows_m:
-        if (datetime.datetime.utcnow() - dato.date_inserted) < datetime.timedelta(30):
-            if dato.result == "2-0" or dato.result == "2-1":
-                if not dato.username1 in dicc_month:
-                    dicc_month[dato.username1] = [0, 0, 0]
-                if not dato.username2 in dicc_month:
-                    dicc_month[dato.username2] = [0, 0, 0]
-
-                dicc_month[dato.username1][0] += 1
-                dicc_month[dato.username2][1] += 1
-            else:
-                dicc_month[dato.username1][1] += 1
-                dicc_month[dato.username2][0] += 1
+#                 dicc_month[dato.username1][0] += 1
+#                 dicc_month[dato.username2][1] += 1
+#             else:
+#                 dicc_month[dato.username1][1] += 1
+#                 dicc_month[dato.username2][0] += 1
 
 
-    for key, value in dicc_month.items():
-        dicc_month[key][2] = int(round((dicc_month[key][0] *100) / (dicc_month[key][0] + dicc_month[key][1])))
+#     for key, value in dicc_month.items():
+#         dicc_month[key][2] = int(round((dicc_month[key][0] *100) / (dicc_month[key][0] + dicc_month[key][1])))
 
-    for i in dicc_month.items():
-        last_month.append(i)
+#     for i in dicc_month.items():
+#         last_month.append(i)
 
-    return last_month
-
+#     return last_month
 
 # Login, if no user is log in, the web redirects here
 @app.route("/login", methods=["POST", 'GET'])
@@ -560,20 +547,19 @@ def decks_stats():
         return redirect('/magic')
 
 
-@app.route('/chart')
-def chart():
-    lass = last_month()
-    labels = [i[0] for i in lass]
-    dataset = [i[1][2] for i in lass]
+# @app.route('/chart')
+# def chart():
+#     lass = last_month()
+#     labels = [i[0] for i in lass]
+#     dataset = [i[1][2] for i in lass]
 
-    my_plot = plot([go.Bar(x=labels, y=dataset)], output_type='div')
+#     my_plot = plot([go.Bar(x=labels, y=dataset)], output_type='div')
 
-    try:
-        return render_template('chart.html', plot=(Markup(my_plot), session['user']))
+#     try:
+#         return render_template('chart.html', plot=(Markup(my_plot), session['user']))
 
-    except:
-        return redirect('/magic')
-
+#     except:
+#         return redirect('/magic')
 
 # Create an user
 @app.route('/register', methods=['GET', 'POST'])
@@ -631,7 +617,9 @@ def logout():
 
     return redirect('/')
 
-# get all users
+
+
+# TEST ROUTES!!!!!!!!!!!!!!!
 @app.route('/get_users', methods=['GET'])
 def get_users():
   try:
@@ -657,14 +645,97 @@ def add_a():
         with app.app_context():
             db.session.add(row)
             db.session.commit()
+            
+        with app.app_context():
+            id_user = User.query.all()[-1].id
+        pl = Player(id_user, username)
+        core.players.append(pl)
 
         return jsonify({'message': 'User added successfully'}), 201  # 201 Created status code
     except Exception as e:
-        print(e)
         return make_response(jsonify({'error': str(e)}), 500)
 
+
+@app.route('/add_d', methods=["POST"])
+def add_d():
+    try:
+        data = request.json  # Assuming you're sending JSON data in the request body
+        name_deck = data.get('deck')
+        format_ = data.get('format')
+        user_id = data.get("user_id")
+
+        row = Deck(name=name_deck, formato=format_, userID=user_id)
+        with app.app_context():
+            db.session.add(row)
+            db.session.commit()
+        
+        try:
+            # Go and add the deck to that user, so you can use it without logging out
+            with app.app_context():
+                id_deck = Deck.query.all()[-1].id
+            d = Mazo(id_deck, name_deck, format_)
+            core.decks.append(d)
+            for us in core.players:
+                if d.playerID == us.id:
+                    us.decks.append(d)
+            return redirect('/magic')
+        except Exception:
+                return "Something went wrong creating the deck"
+    except Exception as e:
+        return make_response(jsonify({'error': str(e)}), 500)
+
+
+@app.route('/add_r', methods=["POST"])
+def add_r():
+    try:
+        data = request.json  # Assuming you're sending JSON data in the request body
+        user_one = data.get('username1')
+        deck_one = data.get('deck1')
+        result = data.get("resultado")
+        deck_two = data.get("deck2")
+        user_two = data.get("username2")
+        mvp = data.get("mvp")
+        
+        with app.app_context():
+            id1 = User.query.filter_by(username=user_one)[0].id
+            id2 = User.query.filter_by(username=user_two)[0].id
+            deckid1 = Deck.query.filter_by(name=deck_one)[0].id
+            deckid2 = Deck.query.filter_by(name=deck_two)[0].id
+
+        row = Result(username1=user_one, deck1=deck_one, result=result, deck2=deck_two,
+                        username2=user_two, mvp=mvp, userID1=id1, userID2=id2, deckID1=deckid1, deckID2=deckid2)
+
+        # Try to save it in the database, and go back to the 'main' page
+        try:
+            db.session.add(row)
+            db.session.commit()
+            return redirect('/magic')
+
+        except Exception as error:
+            return error
+    except Exception as e:
+        return make_response(jsonify({'error': str(e)}), 500)
+    
+with app.app_context():
+        # The following code should now be within the application context
+        users = User.query.all()
+        decks = Deck.query.all()
+
+        for deck in decks:
+            d = Mazo(deck.id, deck.name, deck.formato)
+            d.playerID = deck.userID
+            core.decks.append(d)
+
+        for user in users:
+            p = Player(user.id, user.username)
+            for deck in core.decks:
+                if deck.playerID == p.id:
+                    p.decks.append(deck)
+            core.players.append(p)
+            
 if __name__ == '__main__':
     app.run(debug=True)
+
     
 # get all users
 @app.route('/get_decks', methods=['GET'])
@@ -675,23 +746,3 @@ def get_decks():
         return make_response(jsonify([deck.json() for deck in decks]), 200)
     except Exception as e:
         return(e)
-        return make_response(jsonify({'message': 'error getting decks'}), 500)
-
-# if __name__ == "__main__":
-#     with app.app_context():
-#         # The following code should now be within the application context
-#         users = User.query.all()
-#         decks = Deck.query.all()
-
-#         for deck in decks:
-#             d = Mazo(deck.id, deck.name, deck.formato)
-#             d.playerID = deck.userID
-#             core.decks.append(d)
-
-#         for user in users:
-#             p = Player(user.id, user.username)
-#             for deck in core.decks:
-#                 if deck.playerID == p.id:
-#                     p.decks.append(deck)
-#             core.players.append(p)
-#     app.run(debug=True)

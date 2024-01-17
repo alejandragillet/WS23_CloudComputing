@@ -27,3 +27,5 @@ the app needs to have all for working! data in users, decks and results
 the app needs the app.app_context() when interacting with db
 was psycopg2 in docker-compose the one that did the trick??
 
+
+test

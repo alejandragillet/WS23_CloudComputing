@@ -1,0 +1,48 @@
+services:
+  flask:
+    build:
+      context: ./..
+      dockerfile: .Dockerfile
+
+    image: alejandragillet/flask_app # hace falta para cuando se hace push a docker hub!
+    container_name: flask_app
+
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - DB_URL=postgresql+psycopg2://postgres:postgres@db:5432/postgres
+  db:
+    container_name: db2
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+
+  plot:
+    build:
+      context: ./..
+      dockerfile: plot.Dockerfile
+    image: alejandragillet/plot # hace falta para cuando se hace push a docker hub!
+    container_name: plot
+
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+    environment:
+      - FLASK_APP=plot.py
+      - FLASK_DEBUG=1
+      - DB_URL=postgresql+psycopg2://postgres:postgres@db:5432/postgres
+
+
+volumes:
+  postgres_data: {}
